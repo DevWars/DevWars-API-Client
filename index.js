@@ -1,6 +1,7 @@
 const LinkedAccounts = require("./endpoints/linkedAccounts");
 const Authentication = require("./endpoints/authentication");
 const Leaderboards = require("./endpoints/leaderboards");
+const Activities = require("./endpoints/activities");
 const Contact = require("./endpoints/contact");
 const Health = require("./endpoints/health");
 const Search = require("./endpoints/search");
@@ -21,6 +22,7 @@ module.exports = class DevWarsApi {
     this.leaderboards = new Leaderboards(axios, "leaderboards");
     this.linkedAccounts = new LinkedAccounts(axios, "oauth");
     this.authentication = new Authentication(axios, "auth");
+    this.activities = new Activities(axios, "activities");
     this.contact = new Contact(axios, "contact");
     this.health = new Health(axios, "health");
     this.search = new Search(axios, "search");
