@@ -2,7 +2,7 @@ const Endpoint = require("./endpoint");
 
 module.exports = class Health extends Endpoint {
     /**
-     * Creates a new instance of the infrastructure class.
+     * Creates a new instance of the health class.
      * @param {AxiosInstance} client The axios client to be used to communicate with the api.
      * @param {string} path Any additional appended path (e.g /users)
      */
