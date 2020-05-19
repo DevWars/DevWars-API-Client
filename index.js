@@ -1,5 +1,10 @@
-const Health = require("./endpoints/health");
+
+const LinkedAccounts = require("./endpoints/linkedAccounts");
 const Authentication = require("./endpoints/authentication");
+const Contact = require("./endpoints/contact");
+const Health = require("./endpoints/health");
+const Search = require("./endpoints/search");
+const Users = require("./endpoints/users");
 
 module.exports = class DevWarsApi {
     /**
@@ -13,7 +18,12 @@ module.exports = class DevWarsApi {
      * @param {AxiosInstance} client The axios client to be used to communicate with the api.
      */
     constructor(axios) {
-        this.health = new Health(axios, "health");
+        this.linkedAccounts = new LinkedAccounts(axios, "oauth");
         this.authentication = new Authentication(axios, "auth");
+        this.contact = new Contact(axios, "contact");
+        this.health = new Health(axios, "health");
+        this.search = new Search(axios, "search");
+        this.users = new Users(axios, "users");
+    /*
     }
 };
