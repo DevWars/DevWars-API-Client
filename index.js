@@ -6,6 +6,7 @@ const Contact = require("./endpoints/contact");
 const Health = require("./endpoints/health");
 const Search = require("./endpoints/search");
 const Users = require("./endpoints/users");
+const Games = require("./endpoints/games");
 
 module.exports = class DevWarsApi {
   /**
@@ -27,5 +28,6 @@ module.exports = class DevWarsApi {
     this.health = new Health(axios, "health");
     this.search = new Search(axios, "search");
     this.users = new Users(axios, "users");
+    this.games = new Games(axios, "games");
   }
 };
