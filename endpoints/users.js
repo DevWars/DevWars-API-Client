@@ -1,0 +1,251 @@
+const Endpoint = require("./endpoint");
+const ApiError = require("./api.error");
+
+module.exports = class Users extends Endpoint {
+    /**
+     * Creates a new instance of the user class.
+     * @param {AxiosInstance} client The axios client to be used to communicate with the api.
+     * @param {string} path Any additional appended path (e.g /users)
+     */
+    constructor(client, path) {
+        super(client, path);
+    }
+
+    /**
+     * Gets all the users with paging.
+     * @param {object} cursorDetails The paging details object containing the
+     * optional after, before and first.
+     */
+    async usersWithPaging(cursorDetails) {
+        const urlQueryValues = [];
+
+        ["after", "before", "first"].forEach((value) => {
+            if (cursorDetails[value] != null)
+                urlQueryValues.push(`${value}=${cursorDetails[value]}`);
+        });
+
+        const options = this.buildOptions({
+            path: `${this.path}?${urlQueryValues.join("&")}`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Get the users leaderboards.
+     */
+    async getLeaderboards() {
+        const options = this.buildOptions({
+            path: `${this.path}/leaderboards`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Update the given user by the provided id, the specified details are the
+     * updated properties as per the servers requirements.
+     * @param {number} userId The id of the user being updated.
+     * @param {details} details The details of the user that are being changed.
+     */
+    async updateUser(userId, details) {
+        const updatingBody = {};
+
+        ["username", "role"].forEach((value) => {
+            if (details[value] != null) updatingBody[value] = details[value];
+        });
+
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}`,
+            method: "put",
+            body: updatingBody,
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Updates the given users avatar.
+     * @param {number} userId The id of the user updating there avatar.
+     */
+    async updateUserAvatar(userId) {
+        throw new ApiError(500, "Currently not implemented");
+    }
+
+    /**
+     * Deletes a user by the given id.
+     * @param {number} userId The id of the user being removed.
+     */
+    async deleteUser(userId) {
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}`,
+            method: "delete",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Gets the given users stats.
+     * @param {number} userId The id of the user.
+     */
+    async getUserStats(userId) {
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}/stats`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Gets the given users game stats.
+     * @param {number} userId The id of the user.
+     */
+    async getUserGameStats(userId) {
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}/stats/game`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Gets the current authenticated users coins.
+     */
+    async getAuthenticatedUsersCoins() {
+        const options = this.buildOptions({
+            path: `${this.path}/stats/coins`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Gets the given users profile.
+     * @param {number} userId The id of the user.
+     */
+    async getUserProfile(userId) {
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}/profile`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * update the given users profile with the provided details.
+     * @param {number} userId The id of the user.
+     * @param {details} details The details of the users profile that are being changed.
+     */
+    async updateUsersProfile(userId, details) {
+        const updatingBody = {};
+
+        [
+            "firstName",
+            "lastName",
+            "dob",
+            "sex",
+            "about",
+            "forHire",
+            "company",
+            "websiteUrl",
+            "addressOne",
+            "addressTwo",
+            "city",
+            "state",
+            "zip",
+            "country",
+            "skills",
+        ].forEach((value) => {
+            if (details[value] != null) updatingBody[value] = details[value];
+        });
+
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}/profile`,
+            method: "patch",
+            body: updatingBody,
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Gets the given users email permission.
+     * @param {number} userId The id of the user.
+     */
+    async getUsersEmailPermissions(userId) {
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}/emails/permissions`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Gets the given users email permission.
+     * @param {number} userId The id of the user.
+     * @param {details} details The details of the users email permissions that are being changed.
+     */
+    async updateUsersEmailPermissions(userId, details) {
+        const updatingBody = {};
+
+        ["news", "gameApplications", "schedules", "linkedAccounts"].forEach(
+            (value) => {
+                if (details[value] != null)
+                    updatingBody[value] = details[value];
+            }
+        );
+
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}/emails/permissions`,
+            method: "get",
+            body: updatingBody,
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Gets the given users linked account connections.
+     * @param {number} userId The id of the user.
+     */
+    async getUserConnections(userId) {
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}/connections`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+
+    /**
+     * Gets the given users linked account connection by provider.
+     * @param {number} userId The id of the user.
+     * @param {string} provider The provider of the linked account, e.g twitch.
+     */
+    async getUserConnectionsByProvider(userId, provider) {
+        const options = this.buildOptions({
+            path: `${this.path}/${userId}/connections/${provider}`,
+            method: "get",
+            body: {},
+        });
+
+        return this.apiCall(options);
+    }
+};
