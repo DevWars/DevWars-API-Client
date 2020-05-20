@@ -321,4 +321,37 @@ module.exports = class Users extends Endpoint {
 
     return this.apiCall(options);
   }
+
+  /******************************
+   *  Games
+   ******************************/
+
+  /**
+   * Get all the users games they have played in
+   * @param {number} userId The id of the user.
+   */
+  async getAllUsersPlayedGames(userId) {
+    const options = this.buildOptions({
+      path: `${this.path}/${userId}/games`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
+
+  /**
+   * Get a single users game that they played in .
+   * @param {number} userId The id of the user.
+   * @param {number} gameId The id of the application.
+   */
+  async getSingleUsersPlayedGameById(userId, gameId) {
+    const options = this.buildOptions({
+      path: `${this.path}/${userId}/games/${gameId}`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
 };
