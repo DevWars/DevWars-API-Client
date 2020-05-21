@@ -90,13 +90,17 @@ module.exports = class Users extends Endpoint {
     return this.apiCall(options);
   }
 
+  /******************************
+   *  Stats
+   ******************************/
+
   /**
    * Gets the given users stats.
    * @param {number} userId The id of the user.
    */
-  async getUserStats(userId) {
+  async getUserStatistics(userId) {
     const options = this.buildOptions({
-      path: `${this.path}/${userId}/stats`,
+      path: `${this.path}/${userId}/statistics`,
       method: "get",
       body: {},
     });
@@ -108,9 +112,9 @@ module.exports = class Users extends Endpoint {
    * Gets the given users game stats.
    * @param {number} userId The id of the user.
    */
-  async getUserGameStats(userId) {
+  async getUserGameStatistics(userId) {
     const options = this.buildOptions({
-      path: `${this.path}/${userId}/stats/game`,
+      path: `${this.path}/${userId}/statistics/game`,
       method: "get",
       body: {},
     });
@@ -118,18 +122,9 @@ module.exports = class Users extends Endpoint {
     return this.apiCall(options);
   }
 
-  /**
-   * Gets the current authenticated users coins.
-   */
-  async getAuthenticatedUsersCoins() {
-    const options = this.buildOptions({
-      path: `${this.path}/stats/coins`,
-      method: "get",
-      body: {},
-    });
-
-    return this.apiCall(options);
-  }
+  /******************************
+   *  Profile
+   ******************************/
 
   /**
    * Gets the given users profile.
