@@ -11,28 +11,6 @@ module.exports = class LinkedAccounts extends Endpoint {
   }
 
   /**
-   * Gets all the linked accounts with paging.
-   * @param {object} cursorDetails The paging details object containing the
-   * optional after, before and first.
-   */
-  async linkedAccountsWithPaging(cursorDetails) {
-    const urlQueryValues = [];
-
-    ["after", "before", "first"].forEach((value) => {
-      if (cursorDetails[value] != null)
-        urlQueryValues.push(`${value}=${cursorDetails[value]}`);
-    });
-
-    const options = this.buildOptions({
-      path: `${this.path}?${urlQueryValues.join("&")}`,
-      method: "get",
-      body: {},
-    });
-
-    return this.apiCall(options);
-  }
-
-  /**
    * Disconnects a given provider for the current authenticated user.
    * @param {string} provider The provider being disconnected e.g twitch.
    */
@@ -47,16 +25,45 @@ module.exports = class LinkedAccounts extends Endpoint {
   }
 
   /**
-   * Update the given users with the provided amount of coins.
-   * @param {object} updates object of keys containing the a object of the
-   * twitchUser (id and or username) and the amount.
+   * Get the related users coins via a provider, like twitch. This is all the
+   * users coins and not just the coins they gained from twitch/discord (unless
+   * the account is not linked)
+   * @param {string} provider The name of the provider, e.g twitch.
+   * @param {string} providerId The account id of the users provider account.
    */
-  async updateTwitchCoinsForUser(updates) {
+  async getCoinsByProviderAndId(provider, providerId) {
     const options = this.buildOptions({
-      path: `${this.path}/twitch/coins`,
-      method: "put",
+      path: `${this.path}/${provider}/${providerId}/coins`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
+
+  /**
+   * update the related users coins via a provider, like twitch. This is all the
+   * users coins and not just the coins they gained from twitch/discord (unless
+   * the account is not linked)
+   * @param {string} provider The name of the provider, e.g twitch.
+   * @param {string} providerId The account id of the users provider account.
+   * @param {string} providerUsername The username of the provider account, used
+   * to create the missing account if the user does not exist.
+   * @param {number} delta The shift in the amount of coins being added or
+   * removed.
+   */
+  async updateCoinsByProviderAndId(
+    provider,
+    providerId,
+    providerUsername,
+    delta
+  ) {
+    const options = this.buildOptions({
+      path: `${this.path}/${provider}/${providerId}/coins`,
+      method: "patch",
       body: {
-        updates,
+        username: providerUsername,
+        amount: delta,
       },
     });
 
