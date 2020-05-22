@@ -11,6 +11,10 @@ module.exports = class Users extends Endpoint {
     super(client, path);
   }
 
+  /******************************
+   *  General
+   ******************************
+
   /**
    * Gets all the users with paging.
    * @param {object} cursorDetails The paging details object containing the
@@ -34,19 +38,6 @@ module.exports = class Users extends Endpoint {
   }
 
   /**
-   * Get the users leaderboards.
-   */
-  async getLeaderboards() {
-    const options = this.buildOptions({
-      path: `${this.path}/leaderboards`,
-      method: "get",
-      body: {},
-    });
-
-    return this.apiCall(options);
-  }
-
-  /**
    * Update the given user by the provided id, the specified details are the
    * updated properties as per the servers requirements.
    * @param {number} userId The id of the user being updated.
@@ -61,19 +52,11 @@ module.exports = class Users extends Endpoint {
 
     const options = this.buildOptions({
       path: `${this.path}/${userId}`,
-      method: "put",
+      method: "patch",
       body: updatingBody,
     });
 
     return this.apiCall(options);
-  }
-
-  /**
-   * Updates the given users avatar.
-   * @param {number} userId The id of the user updating there avatar.
-   */
-  async updateUserAvatar(userId) {
-    throw new ApiError(500, "Currently not implemented");
   }
 
   /**
@@ -91,7 +74,19 @@ module.exports = class Users extends Endpoint {
   }
 
   /******************************
-   *  Stats
+   *  AVATAR
+   ******************************/
+
+  /**
+   * Updates the given users avatar.
+   * @param {number} userId The id of the user updating there avatar.
+   */
+  async updateUserAvatar(userId) {
+    throw new ApiError(500, "Currently not implemented");
+  }
+
+  /******************************
+   *  Statistics
    ******************************/
 
   /**
