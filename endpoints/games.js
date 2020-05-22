@@ -163,7 +163,7 @@ module.exports = class Games extends Endpoint {
    */
   async activateGame(gameId) {
     const options = this.buildOptions({
-      path: `${this.path}/${gameId}/activate`,
+      path: `${this.path}/${gameId}/actions/activate`,
       method: "post",
       body: {},
     });
@@ -177,7 +177,7 @@ module.exports = class Games extends Endpoint {
    */
   async endGame(gameId) {
     const options = this.buildOptions({
-      path: `${this.path}/${gameId}/end`,
+      path: `${this.path}/${gameId}/actions/end`,
       method: "post",
       body: {},
     });
