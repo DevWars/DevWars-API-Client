@@ -200,6 +200,20 @@ module.exports = class Games extends Endpoint {
   }
 
   /**
+   * Get all assigned players to a game.
+   * @param {number} gameId The id of the game.
+   */
+  async getAllAssignedPLayersToGame(gameId) {
+    const options = this.buildOptions({
+      path: `${this.path}/${gameId}/players`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
+
+  /**
    * Add the player to the given game.
    * @param {number} gameId The id of the game.
    * @param {object} player The player being added.
@@ -208,11 +222,11 @@ module.exports = class Games extends Endpoint {
     const playerBody = {};
 
     ["id", "language", "team"].forEach((value) => {
-      if (details[value] != null) playerBody[value] = details[value];
+      if (player[value] != null) playerBody[value] = details[value];
     });
 
     const options = this.buildOptions({
-      path: `${this.path}/${gameId}/player`,
+      path: `${this.path}/${gameId}/players`,
       method: "post",
       body: { player: playerBody },
     });
@@ -223,18 +237,13 @@ module.exports = class Games extends Endpoint {
   /**
    * Removes the given player from the given game.
    * @param {number} gameId The id of the game.
+   * @param {number} playerId The player id being removed.
    */
-  async removePlayerFromGame(gameId) {
-    const playerBody = {};
-
-    ["id"].forEach((value) => {
-      if (details[value] != null) playerBody[value] = details[value];
-    });
-
+  async removePlayerFromGame(gameId, playerId) {
     const options = this.buildOptions({
-      path: `${this.path}/${gameId}`,
+      path: `${this.path}/${gameId}/players`,
       method: "delete",
-      body: { player: playerBody },
+      body: { player: { id: playerId } },
     });
 
     return this.apiCall(options);
