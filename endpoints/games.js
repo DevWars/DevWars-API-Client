@@ -90,32 +90,6 @@ module.exports = class Games extends Endpoint {
   }
 
   /**
-   * Get the latest game.
-   */
-  async getLatestGame() {
-    const options = this.buildOptions({
-      path: `${this.path}/latest`,
-      method: "get",
-      body: {},
-    });
-
-    return this.apiCall(options);
-  }
-
-  /**
-   * Get the active game.
-   */
-  async getLatestGame() {
-    const options = this.buildOptions({
-      path: `${this.path}/active`,
-      method: "get",
-      body: {},
-    });
-
-    return this.apiCall(options);
-  }
-
-  /**
    * Get the given game by the provided id.
    * @param {number} gameId The id of the game.
    */
