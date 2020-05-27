@@ -24,7 +24,7 @@ module.exports = class Leaderboards extends Endpoint {
     });
 
     const options = this.buildOptions({
-      path: `${this.path}/users`,
+      path: `${this.path}/users?${urlQueryValues.join("&")}`,
       method: "get",
       body: {},
     });
