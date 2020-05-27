@@ -58,7 +58,11 @@ module.exports = class Endpoint {
    * @param {string} url The raw url without any changes.
    */
   getUrl(method, url) {
-    if (!["get", "head"].includes(method.toLowerCase())) return url;
+    if (
+      !["get", "head"].includes(method.toLowerCase()) ||
+      Object.keys(Endpoint.body).length == 0
+    )
+      return url;
 
     const queryParams = [];
 
@@ -66,7 +70,8 @@ module.exports = class Endpoint {
       queryParams.push(`${key}=${Endpoint.body[key]}`);
     }
 
-    return `${url}?${queryParams.join("&")}`;
+    url += url.includes("?") ? "&" : "?";
+    return `${url}${queryParams.join("&")}`;
   }
 
   /**
