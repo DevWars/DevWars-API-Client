@@ -12,8 +12,17 @@ module.exports = class Leaderboards extends Endpoint {
 
   /**
    * Get the related leaderboards for the users.
+   * @param {number} cursorDetails.first first The number of records to be returned.
+   * @param {number} cursorDetails.after The number of records to skip.
    */
-  async leaderboardsOfUsers() {
+  async leaderboardsOfUsers(cursorDetails) {
+    const urlQueryValues = [];
+
+    ["first", "after"].forEach((value) => {
+      if (cursorDetails[value] != null)
+        urlQueryValues.push(`${value}=${cursorDetails[value]}`);
+    });
+
     const options = this.buildOptions({
       path: `${this.path}/users`,
       method: "get",
