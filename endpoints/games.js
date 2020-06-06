@@ -18,7 +18,7 @@ module.exports = class Games extends Endpoint {
   async gamesWithPaging(cursorDetails) {
     const urlQueryValues = [];
 
-    ["after", "before", "first"].forEach((value) => {
+    ["after", "before", "first", "status", "season"].forEach((value) => {
       if (cursorDetails[value] != null)
         urlQueryValues.push(`${value}=${cursorDetails[value]}`);
     });
