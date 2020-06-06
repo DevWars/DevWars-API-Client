@@ -177,7 +177,7 @@ module.exports = class Games extends Endpoint {
    * Get all assigned players to a game.
    * @param {number} gameId The id of the game.
    */
-  async getAllAssignedPLayersToGame(gameId) {
+  async getAllAssignedPlayersToGame(gameId) {
     const options = this.buildOptions({
       path: `${this.path}/${gameId}/players`,
       method: "get",
