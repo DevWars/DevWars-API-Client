@@ -22,7 +22,8 @@ module.exports = class Search extends Endpoint {
     const queryProperties = [];
 
     ["limit", "full", "username", "email"].forEach((value) => {
-      if (details[value] != null) queryProperties.push(details[value]);
+      if (details[value] != null)
+        queryProperties.push(`${value}=${details[value]}`);
     });
 
     const options = this.buildOptions({
@@ -45,7 +46,8 @@ module.exports = class Search extends Endpoint {
     const queryProperties = [];
 
     ["limit", "full", "title"].forEach((value) => {
-      if (details[value] != null) queryProperties.push(details[value]);
+      if (details[value] != null)
+        queryProperties.push(`${value}=${details[value]}`);
     });
 
     const options = this.buildOptions({

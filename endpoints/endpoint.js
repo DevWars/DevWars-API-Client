@@ -83,8 +83,6 @@ module.exports = class Endpoint {
       const body = this.getBodyContent(options.method, options.body);
       const url = this.getUrl(options.method, options.path);
 
-      console.log(url, body);
-
       const result = await this.client[options.method](url, body);
 
       return result.data;
