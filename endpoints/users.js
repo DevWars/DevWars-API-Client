@@ -73,6 +73,20 @@ module.exports = class Users extends Endpoint {
     return this.apiCall(options);
   }
 
+  /**
+   * Get the given user by the provided id.
+   * @param {number} userId The id of the user.
+   */
+  async getUser(userId) {
+    const options = this.buildOptions({
+      path: `${this.path}/${userId}`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
+
   /******************************
    *  AVATAR
    ******************************/
