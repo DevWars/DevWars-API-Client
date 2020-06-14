@@ -11,6 +11,20 @@ module.exports = class LinkedAccounts extends Endpoint {
   }
 
   /**
+   * Connect a given provider for the current authenticated user.
+   * @param {string} provider The provider being connected e.g twitch.
+   */
+  async connectLinkedAccount(provider) {
+    const options = this.buildOptions({
+      path: `${this.path}/${provider}`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
+
+  /**
    * Disconnects a given provider for the current authenticated user.
    * @param {string} provider The provider being disconnected e.g twitch.
    */
