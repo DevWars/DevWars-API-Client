@@ -83,7 +83,13 @@ module.exports = class Endpoint {
       const body = this.getBodyContent(options.method, options.body);
       const url = this.getUrl(options.method, options.path);
 
-      const result = await this.client[options.method](url, body);
+      let result = null;
+
+      if (options.method === "delete") {
+        result = await this.client[options.method](url, { data: body });
+      } else {
+        result = await this.client[options.method](url, body);
+      }
 
       return result.data;
     } catch (error) {
