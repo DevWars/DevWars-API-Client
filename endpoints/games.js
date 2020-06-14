@@ -196,7 +196,7 @@ module.exports = class Games extends Endpoint {
     const playerBody = {};
 
     ["id", "language", "team"].forEach((value) => {
-      if (player[value] != null) playerBody[value] = details[value];
+      if (player[value] != null) playerBody[value] = player[value];
     });
 
     const options = this.buildOptions({
