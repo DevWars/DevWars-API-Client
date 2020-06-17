@@ -70,12 +70,13 @@ module.exports = class Games extends Endpoint {
 
     [
       "startTime",
+      "status",
+      "meta",
+      "objectives",
+      "title",
       "season",
       "mode",
-      "title",
       "videoUrl",
-      "status",
-      "storage",
     ].forEach((value) => {
       if (details[value] != null) updatingBody[value] = details[value];
     });
