@@ -71,6 +71,7 @@ module.exports = class Games extends Endpoint {
     [
       "startTime",
       "status",
+      "templates",
       "meta",
       "objectives",
       "title",
