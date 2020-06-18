@@ -11,14 +11,14 @@ module.exports = class Leaderboards extends Endpoint {
   }
 
   /**
-   * Get the related leaderboards for the users.
-   * @param {number} cursorDetails.first first The number of records to be returned.
-   * @param {number} cursorDetails.after The number of records to skip.
+   * Gets all the users with paging.
+   * @param {object} cursorDetails The paging details object containing the
+   * optional after, before and first.
    */
   async leaderboardsOfUsers(cursorDetails) {
     const urlQueryValues = [];
 
-    ["first", "after"].forEach((value) => {
+    ["after", "before", "first"].forEach((value) => {
       if (cursorDetails[value] != null)
         urlQueryValues.push(`${value}=${cursorDetails[value]}`);
     });
