@@ -37,6 +37,31 @@ module.exports = class Search extends Endpoint {
 
   /**
    *
+   * Makes a search for users by connection details
+   * @param {number} details.limit The total upper number of records to return.
+   * @param {boolean} details.full If full details of users should be returned or just basic details.
+   * @param {string} details.provider The provider to search for.
+   * @param {string} details.id The id for the providing user.
+   */
+  async searchForUsersByConnections(details) {
+    const queryProperties = [];
+
+    ["limit", "full", "provider", "id"].forEach((value) => {
+      if (details[value] != null)
+        queryProperties.push(`${value}=${details[value]}`);
+    });
+
+    const options = this.buildOptions({
+      path: `${this.path}/users/connections?${queryProperties.join("&")}`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
+
+  /**
+   *
    * Makes a search for games with the given details.
    * @param {number} details.limit The total upper number of records to return.
    * @param {boolean} details.full If full details of users should be returned or just basic details.
