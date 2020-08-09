@@ -1,12 +1,6 @@
 const ApiError = require("./api.error");
 
-module.exports = class Endpoint {
-  /**
-   * A static body that will be joined with any given body that is also sent.
-   * This can be used to sent api tokens.
-   */
-  static body = {};
-
+class Endpoint {
   /**
    * Creates a endpoint interface to be implemented.
    * @param {AxiosInstance} client The axios client to be used to communicate with the api.
@@ -104,4 +98,15 @@ module.exports = class Endpoint {
       );
     }
   }
-};
+}
+
+/**
+ * A static body that will be joined with any given body that is also sent. This
+ * can be used to sent api tokens.
+ *
+ * This is defined here instead of a static property to be used as a external
+ * project.
+ */
+Endpoint.body = {};
+
+module.exports = Endpoint;
