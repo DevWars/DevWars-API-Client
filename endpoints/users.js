@@ -220,7 +220,7 @@ module.exports = class Users extends Endpoint {
 
     const options = this.buildOptions({
       path: `${this.path}/${userId}/emails/permissions`,
-      method: "get",
+      method: "patch",
       body: updatingBody,
     });
 
