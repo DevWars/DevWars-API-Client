@@ -283,4 +283,19 @@ module.exports = class Games extends Endpoint {
 
     return this.apiCall(options);
   }
+
+  /**
+   * Gets the sources of a game after the completion. If the game has not completed
+   * the response will be a empty array.
+   * @param {number} gameId The id of the game.
+   */
+  async getSourcesForGame(gameId) {
+    const options = this.buildOptions({
+      path: `${this.path}/${gameId}/source`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
 };
