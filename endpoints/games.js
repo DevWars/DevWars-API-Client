@@ -298,4 +298,38 @@ module.exports = class Games extends Endpoint {
 
     return this.apiCall(options);
   }
+
+  /**
+   * Gets the sources of a game after the completion for a given team. If the game has not completed
+   * the response will be a empty array.
+   * @param {number} gameId The id of the game.
+   * @param {number} teamId The id of the team.
+   */
+  async getSourcesForGameAndTeam(gameId, teamId) {
+    const options = this.buildOptions({
+      path: `${this.path}/${gameId}/source/${teamId}`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
+
+  /**
+   * Gets the sources of a game after the completion for a given team and language.
+   * This will be raw string response.
+   *
+   * @param {number} gameId The id of the game.
+   * @param {number} teamId The id of the team.
+   * @param {string} language The language being gathered
+   */
+  async getSourcesForGameAndTeam(gameId, teamId, language) {
+    const options = this.buildOptions({
+      path: `${this.path}/${gameId}/source/${teamId}/${language}`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
 };
