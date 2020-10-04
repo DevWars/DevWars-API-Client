@@ -316,16 +316,18 @@ module.exports = class Games extends Endpoint {
   }
 
   /**
-   * Gets the sources of a game after the completion for a given team and language.
+   * Gets the sources of a game after the completion for a given team and file.
    * This will be raw string response.
+   *
+   * @example /games/1/source/1/game.js
    *
    * @param {number} gameId The id of the game.
    * @param {number} teamId The id of the team.
-   * @param {string} language The language being gathered
+   * @param {string} file The file owned by the game.
    */
-  async getSourcesForGameAndTeam(gameId, teamId, language) {
+  async getSourcesForGameTeamAndFile(gameId, teamId, file) {
     const options = this.buildOptions({
-      path: `${this.path}/${gameId}/source/${teamId}/${language}`,
+      path: `${this.path}/${gameId}/source/${teamId}/${file}`,
       method: "get",
       body: {},
     });
