@@ -294,6 +294,24 @@ module.exports = class Users extends Endpoint {
   }
 
   /******************************
+   *  Badges
+   ******************************/
+
+  /**
+   * Get all the users badges
+   * @param {number} userId The id of the user.
+   */
+  async getUserBadges(userId) {
+    const options = this.buildOptions({
+      path: `${this.path}/${userId}/badges`,
+      method: "get",
+      body: {},
+    });
+
+    return this.apiCall(options);
+  }
+
+  /******************************
    *  Applications
    ******************************/
 
