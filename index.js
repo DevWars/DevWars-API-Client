@@ -3,6 +3,7 @@ const Authentication = require("./endpoints/authentication");
 const Leaderboards = require("./endpoints/leaderboards");
 const Endpoint = require("./endpoints/endpoint");
 const Contact = require("./endpoints/contact");
+const Badges = require("./endpoints/badges");
 const Health = require("./endpoints/health");
 const Search = require("./endpoints/search");
 const Users = require("./endpoints/users");
@@ -20,6 +21,7 @@ class DevWarsApi {
     this.contact = new Contact(axios, "contact");
     this.health = new Health(axios, "health");
     this.search = new Search(axios, "search");
+    this.badges = new Badges(axios, "badges");
     this.users = new Users(axios, "users");
     this.games = new Games(axios, "games");
   }
