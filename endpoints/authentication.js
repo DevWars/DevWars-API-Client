@@ -132,15 +132,15 @@ module.exports = class Authentication extends Endpoint {
   /**
    * Update the given users password.
    * @param {string} oldPassword THe current/old users password.
-   * @param {string} password The new updated users password.
+   * @param {string} newPassword The new updated users password.
    */
-  async updatePassword(oldPassword, password) {
+  async updatePassword(oldPassword, newPassword) {
     const options = this.buildOptions({
       path: `${this.path}/reset/password`,
       method: "put",
       body: {
         oldPassword,
-        password,
+        newPassword,
       },
     });
 
